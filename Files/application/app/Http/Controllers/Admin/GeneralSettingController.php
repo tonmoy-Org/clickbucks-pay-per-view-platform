@@ -72,10 +72,7 @@ class GeneralSettingController extends Controller
         ]);
         if ($request->hasFile('logo')) {
             try {
-                $path = getFilePath('logoIcon');
-                if (!file_exists($path)) {
-                    $path = base_path('../' . $path);
-                }
+                $path = base_path('../' . getFilePath('logoIcon'));
                 if (!file_exists($path)) {
                     mkdir($path, 0755, true);
                 }
@@ -90,10 +87,7 @@ class GeneralSettingController extends Controller
 
         if ($request->hasFile('favicon')) {
             try {
-                $path = getFilePath('logoIcon');
-                if (!file_exists($path)) {
-                    $path = base_path('../' . $path);
-                }
+                $path = base_path('../' . getFilePath('logoIcon'));
                 if (!file_exists($path)) {
                     mkdir($path, 0755, true);
                 }

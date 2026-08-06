@@ -97,6 +97,9 @@ class FileManager
     * @return void
     */
 	public function upload(){
+        if ($this->path && !str_starts_with($this->path, '/') && !preg_match('/^[a-zA-Z]:\\\\/', $this->path)) {
+            $this->path = base_path('../' . $this->path);
+        }
 
         //create the directory if doesn't exists
 		$path = $this->makeDirectory();
