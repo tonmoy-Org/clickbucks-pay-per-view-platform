@@ -11,7 +11,7 @@
                         <div class="col-md-4 d-flex flex-column justify-content-center">
                             <label>@lang('Logo')</label>
                             <div class="file-upload-wrapper" data-text="@lang('Select your file!')">
-                                <input type="file" accept=".png, .jpg, .jpeg" name="logo" class="file-upload-field" id="imageInput">
+                                <input type="file" accept=".png, .jpg, .jpeg, .webp, .svg" name="logo" class="file-upload-field" id="imageInput">
                             </div>
                         </div>
                         <div class="col-md-4 d-flex align-items-center justify-content-center bg--dark">
@@ -27,7 +27,7 @@
                         <div class="col-4 d-flex flex-column justify-content-center">
                             <label>@lang('Favicon')</label>
                             <div class="file-upload-wrapper" data-text="@lang('Select your file!')">
-                                <input type="file" accept=".png, .jpg, .jpeg" name="favicon"
+                                <input type="file" accept=".png, .jpg, .jpeg, .webp, .svg, .ico" name="favicon"
                                     class="file-upload-field" id="imageInputFav">
                             </div>
                         </div>

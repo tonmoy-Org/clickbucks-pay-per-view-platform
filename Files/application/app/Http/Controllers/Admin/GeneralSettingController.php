@@ -79,9 +79,11 @@ class GeneralSettingController extends Controller
                 if (!file_exists($path)) {
                     mkdir($path, 0755, true);
                 }
-                Image::make($request->logo)->save($path . '/logo.png');
+                $image = Image::make($request->logo);
+                $image->save($path . '/logo.png');
             } catch (\Exception $exp) {
-                $notify[] = ['error', 'Couldn\'t upload the logo'];
+                \Log::error('Logo Upload Failed: ' . $exp->getMessage(), ['trace' => $exp->getTraceAsString()]);
+                $notify[] = ['error', 'Couldn\'t upload the logo: ' . $exp->getMessage()];
                 return back()->withNotify($notify);
             }
         }
@@ -96,9 +98,11 @@ class GeneralSettingController extends Controller
                     mkdir($path, 0755, true);
                 }
                 $size = explode('x', getFileSize('favicon'));
-                Image::make($request->favicon)->resize($size[0], $size[1])->save($path . '/favicon.png');
+                $image = Image::make($request->favicon);
+                $image->resize($size[0], $size[1])->save($path . '/favicon.png');
             } catch (\Exception $exp) {
-                $notify[] = ['error', 'Couldn\'t upload the favicon'];
+                \Log::error('Favicon Upload Failed: ' . $exp->getMessage(), ['trace' => $exp->getTraceAsString()]);
+                $notify[] = ['error', 'Couldn\'t upload the favicon: ' . $exp->getMessage()];
                 return back()->withNotify($notify);
             }
         }
