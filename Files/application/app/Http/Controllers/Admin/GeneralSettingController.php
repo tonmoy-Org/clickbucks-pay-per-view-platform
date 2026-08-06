@@ -67,8 +67,8 @@ class GeneralSettingController extends Controller
     public function logoIconUpdate(Request $request)
     {
         $request->validate([
-            'logo' => ['image',new FileTypeValidate(['jpg','jpeg','png'])],
-            'favicon' => ['image',new FileTypeValidate(['png'])],
+            'logo' => ['nullable', 'image', new FileTypeValidate(['jpg','jpeg','png','webp','svg'])],
+            'favicon' => ['nullable', 'image', new FileTypeValidate(['png','ico','jpg','jpeg','webp','svg'])],
         ]);
         if ($request->hasFile('logo')) {
             try {

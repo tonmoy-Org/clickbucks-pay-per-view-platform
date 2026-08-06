@@ -27,7 +27,7 @@ class FileTypeValidate implements Rule
      */
     public function passes($attribute, $value)
     {
-        return in_array($value->getClientOriginalExtension(), $this->extensions);
+        return in_array(strtolower($value->getClientOriginalExtension()), array_map('strtolower', $this->extensions));
     }
 
     /**
