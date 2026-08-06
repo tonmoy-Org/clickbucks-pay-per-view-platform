@@ -63,6 +63,16 @@ class LoginController extends Controller
         return 'username';
     }
 
+    protected function credentials(Request $request)
+    {
+        $login = $request->input($this->username());
+        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        return [
+            $fieldType => $login,
+            'password' => $request->input('password')
+        ];
+    }
+
     public function login(Request $request)
     {
 
