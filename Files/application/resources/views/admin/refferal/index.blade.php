@@ -20,7 +20,7 @@
                                         <div class="row">
                                             <div class="col-md-12" id="planDescriptionContainer"><div class="input-group" style="margin-top: 5px">
                                                 <input name="level" class="form-control margin-top-10 mb-2" type="number" readonly required placeholder="Level-01">
-                                                <input name="percent" class="form-control margin-top-10" type="text" value="{{$refferal->percent}}" required placeholder="Commission Percentage %">
+                                                <input name="percent" class="form-control margin-top-10" type="text" value="{{@$refferal->percent}}" required placeholder="Commission Percentage %">
                                             </div>
                                         </div>
                                     </div>

@@ -23,7 +23,7 @@ class RefferalController extends Controller
             'percent' => 'required|numeric',
        ]);
 
-        $refferal = Refferal::first();
+        $refferal = Refferal::first() ?? new Refferal();
         $refferal->level =  1;
         $refferal->percent =  $request->percent;
         $refferal->save();
