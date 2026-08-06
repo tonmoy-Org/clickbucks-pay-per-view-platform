@@ -74,6 +74,9 @@ class GeneralSettingController extends Controller
             try {
                 $path = getFilePath('logoIcon');
                 if (!file_exists($path)) {
+                    $path = base_path('../' . $path);
+                }
+                if (!file_exists($path)) {
                     mkdir($path, 0755, true);
                 }
                 Image::make($request->logo)->save($path . '/logo.png');
@@ -86,6 +89,9 @@ class GeneralSettingController extends Controller
         if ($request->hasFile('favicon')) {
             try {
                 $path = getFilePath('logoIcon');
+                if (!file_exists($path)) {
+                    $path = base_path('../' . $path);
+                }
                 if (!file_exists($path)) {
                     mkdir($path, 0755, true);
                 }

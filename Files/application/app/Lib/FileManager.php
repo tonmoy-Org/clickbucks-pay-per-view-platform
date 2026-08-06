@@ -165,6 +165,10 @@ class FileManager
 	public function makeDirectory($location = null){
 		if (!$location) $location = $this->path;
 		if (file_exists($location)) return true;
+		if (!file_exists($location) && file_exists(base_path('../' . $location))) {
+			$this->path = base_path('../' . $location);
+			return true;
+		}
     	return mkdir($location, 0755, true);
 	}
 
