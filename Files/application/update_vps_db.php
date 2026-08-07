@@ -35,13 +35,17 @@ foreach ($frontends as $frontend) {
         
         // Contact details update
         if ($frontend->data_keys == 'contact_us.content') {
-            $frontend->data_values->email_address = 'info@ppvbucks.com';
-            $frontend->data_values->contact_number = '316-320-3196';
-            $frontend->data_values->contact_details = '331 James Avenue, El Dorado, KS 67042';
-            $frontend->data_values->short_details = 'PPV Bucks: Your Gateway to Earn Online';
+            $values = json_decode($val);
+            $values->email_address = 'info@ppvbucks.com';
+            $values->contact_number = '316-320-3196';
+            $values->contact_details = '331 James Avenue, El Dorado, KS 67042';
+            $values->short_details = 'PPV Bucks: Your Gateway to Earn Online';
+            $frontend->data_values = $values;
         } else if ($frontend->data_keys == 'about.content') {
-            $frontend->data_values->heading = 'Start Earning From The Comfort Of Home!';
-            $frontend->data_values->description = 'PPV Bucks is a leading digital marketing agency specializing in driving online traffic and maximizing conversions for businesses. With a focus on ROI-driven strategies';
+            $values = json_decode($val);
+            $values->heading = 'Start Earning From The Comfort Of Home!';
+            $values->description = 'PPV Bucks is a leading digital marketing agency specializing in driving online traffic and maximizing conversions for businesses. With a focus on ROI-driven strategies';
+            $frontend->data_values = $values;
         } else {
             $frontend->data_values = json_decode($val);
         }
