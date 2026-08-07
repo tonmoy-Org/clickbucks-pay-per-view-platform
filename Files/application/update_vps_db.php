@@ -51,6 +51,22 @@ foreach ($frontends as $frontend) {
 }
 echo "Frontend content and contact info updated.\n";
 
+// Update about elements (bullet points)
+$aboutElements = Frontend::where('data_keys', 'about.element')->orderBy('id', 'asc')->get();
+$aboutElementTexts = [
+    "Elevating your online. Discover our top-tier digital marketing and PPV advertising services designed to maximize your ROI and engage your target audience effectively.",
+    "Where strategy meets. Discover our top-tier digital marketing and PPV advertising services designed to maximize your ROI and engage your target audience effectively.",
+    "We drive results with PPV. Discover our top-tier digital marketing and PPV advertising services designed to maximize your ROI and engage your target audience effectively.",
+    "Your digital growth. Discover our top-tier digital marketing and PPV advertising services designed to maximize your ROI and engage your target audience effectively."
+];
+foreach ($aboutElements as $index => $el) {
+    if (isset($aboutElementTexts[$index])) {
+        $el->data_values = (object)['content' => $aboutElementTexts[$index]];
+        $el->save();
+    }
+}
+echo "About elements updated.\n";
+
 // 3. Pages / Menus Update
 $pages = Page::all();
 foreach ($pages as $page) {
