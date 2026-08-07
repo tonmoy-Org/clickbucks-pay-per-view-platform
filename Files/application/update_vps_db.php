@@ -39,6 +39,9 @@ foreach ($frontends as $frontend) {
             $frontend->data_values->contact_number = '316-320-3196';
             $frontend->data_values->contact_details = '331 James Avenue, El Dorado, KS 67042';
             $frontend->data_values->short_details = 'PPV Bucks: Your Gateway to Earn Online';
+        } else if ($frontend->data_keys == 'about.content') {
+            $frontend->data_values->heading = 'Start Earning From The Comfort Of Home!';
+            $frontend->data_values->description = 'PPV Bucks is a leading digital marketing agency specializing in driving online traffic and maximizing conversions for businesses. With a focus on ROI-driven strategies';
         } else {
             $frontend->data_values = json_decode($val);
         }
