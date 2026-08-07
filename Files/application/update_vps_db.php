@@ -131,7 +131,7 @@ foreach ($testimonials as $index => $testimonial) {
 }
 echo "Testimonials updated.\n";
 
-// 6. Create 3 Plans (Standard, Gold, Platinum) - avoid duplicates
+// 6. Create 3 Plans (Standard, Gold, Platinum) - manually to bypass mass assignment
 $plans = [
     ['name' => 'Standard', 'price' => 10, 'point' => 100, 'status' => 1],
     ['name' => 'Gold', 'price' => 50, 'point' => 600, 'status' => 1],
@@ -139,14 +139,19 @@ $plans = [
 ];
 
 foreach ($plans as $p) {
-    Plan::updateOrCreate(
-        ['name' => $p['name']],
-        ['price' => $p['price'], 'point' => $p['point'], 'status' => $p['status']]
-    );
+    $plan = Plan::where('name', $p['name'])->first();
+    if (!$plan) {
+        $plan = new Plan();
+        $plan->name = $p['name'];
+    }
+    $plan->price = $p['price'];
+    $plan->point = $p['point'];
+    $plan->status = $p['status'];
+    $plan->save();
 }
 echo "Subscription plans updated.\n";
 
-// 7. Create Withdrawal Methods - avoid duplicates
+// 7. Create Withdrawal Methods - manually to bypass mass assignment
 function getOrCreateForm($label) {
     $form = Form::where('act', 'withdraw_method')
                 ->where('form_data', 'like', '%' . $label . '%')
@@ -218,20 +223,21 @@ $withdrawMethods = [
 
 foreach ($withdrawMethods as $wm) {
     $formId = getOrCreateForm($wm['label']);
-    WithdrawMethod::updateOrCreate(
-        ['name' => $wm['name']],
-        [
-            'form_id' => $formId,
-            'min_limit' => $wm['min_limit'],
-            'max_limit' => $wm['max_limit'],
-            'fixed_charge' => $wm['fixed_charge'],
-            'percent_charge' => $wm['percent_charge'],
-            'rate' => $wm['rate'],
-            'currency' => $wm['currency'],
-            'description' => $wm['description'],
-            'status' => 1
-        ]
-    );
+    $wmRecord = WithdrawMethod::where('name', $wm['name'])->first();
+    if (!$wmRecord) {
+        $wmRecord = new WithdrawMethod();
+        $wmRecord->name = $wm['name'];
+    }
+    $wmRecord->form_id = $formId;
+    $wmRecord->min_limit = $wm['min_limit'];
+    $wmRecord->max_limit = $wm['max_limit'];
+    $wmRecord->fixed_charge = $wm['fixed_charge'];
+    $wmRecord->percent_charge = $wm['percent_charge'];
+    $wmRecord->rate = $wm['rate'];
+    $wmRecord->currency = $wm['currency'];
+    $wmRecord->description = $wm['description'];
+    $wmRecord->status = 1;
+    $wmRecord->save();
 }
 echo "Withdrawal methods updated.\n";
 echo "Database update completed successfully!\n";
