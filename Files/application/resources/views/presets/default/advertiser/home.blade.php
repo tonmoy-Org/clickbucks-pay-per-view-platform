@@ -76,8 +76,7 @@
                         </div>
                         <div class="document-item__content">
                             <h4 class="title"><a href="#0" class="text-underline">Section Manager</a></h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta incidunt quod ipsa neque
-                                consequatur aspernatur earum quos est, totam cumque!</p>
+                            <p>Manage your PPV campaigns, targets, and banners effortlessly. View detailed reports and optimize your budget settings in real-time.</p>
                         </div>
                     </div>
                 </div>
@@ -88,8 +87,7 @@
                         </div>
                         <div class="document-item__content">
                             <h4 class="title"><a href="#0" class="text-underline">Payment Gateway</a></h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta incidunt quod ipsa neque
-                                consequatur aspernatur earum quos est, totam cumque!</p>
+                            <p>Deposit funds securely using various payment methods, including cryptocurrencies (USDT TRC20), bank transfers, and popular online wallets.</p>
                         </div>
                     </div>
                 </div>
@@ -100,8 +98,7 @@
                         </div>
                         <div class="document-item__content">
                             <h4 class="title"><a href="#0" class="text-underline">Smart Code</a></h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta incidunt quod ipsa neque
-                                consequatur aspernatur earum quos est, totam cumque!</p>
+                            <p>Integrate our light-weight tracking codes to monitor conversions, clicks, and impressions accurately with zero page speed impact.</p>
                         </div>
                     </div>
                 </div>
@@ -112,8 +109,7 @@
                         </div>
                         <div class="document-item__content">
                             <h4 class="title"><a href="#0" class="text-underline">Smart UI/UX</a></h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta incidunt quod ipsa neque
-                                consequatur aspernatur earum quos est, totam cumque!</p>
+                            <p>Enjoy a fully responsive and clean advertiser control panel designed to streamline your digital marketing campaign workflow.</p>
                         </div>
                     </div>
                 </div>

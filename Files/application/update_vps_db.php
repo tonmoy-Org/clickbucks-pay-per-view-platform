@@ -27,8 +27,17 @@ foreach ($frontends as $frontend) {
     if (isset($frontend->data_values)) {
         $val = json_encode($frontend->data_values);
         
+        // Rebrand email, phone and address in frontend content (cookie, privacy, terms policies, etc.)
+        $val = str_ireplace('clickbuck@gmail.com', 'info@ppvbucks.com', $val);
+        $val = str_ireplace('clickbucks@gmail.com', 'info@ppvbucks.com', $val);
+        $val = str_ireplace('PPV Bucks@gmail.com', 'info@ppvbucks.com', $val);
+        $val = str_ireplace('PPVBucks@gmail.com', 'info@ppvbucks.com', $val);
+        $val = str_ireplace('+006668882222', '316-320-3196', $val);
+        $val = str_ireplace('America,Nework', '331 James Avenue<br>El Dorado, KS 67042', $val);
+
         // Rebrand ClickBucks -> PPV Bucks
         $val = str_ireplace('ClickBucks', 'PPV Bucks', $val);
+        $val = str_ireplace('Clickbucks', 'PPVBucks', $val);
         // Replace Lorem Ipsum & old PTC branding with Digital Marketing
         $val = str_ireplace('PTC Ads', 'PPV & Digital Marketing', $val);
         $val = str_ireplace('PTC and view ads', 'PPV and Digital Marketing', $val);
@@ -59,6 +68,15 @@ foreach ($frontends as $frontend) {
             $values->heading = 'Best PPV Bucks Platform in The World';
             $values->highlighted_heading_text = 'PPV Bucks';
             $values->sub_heading = 'Unlock limitless earning potential with PPV Bucks! Join today for reliable payouts, a seamless user experience, and a plethora of opportunities awaiting you. Start maximizing your earnings now!';
+            $frontend->data_values = $values;
+        } else if ($frontend->data_keys == 'seo.data') {
+            $values = json_decode($val);
+            $values->description = 'PPV Bucks is the leading Pay-Per-View advertising platform where you can earn rewards by viewing digital marketing campaigns, and advertisers can drive high-quality traffic.';
+            $values->social_description = 'Earn online with PPV Bucks! The ultimate platform for PPV advertising and digital marketing campaigns.';
+            $frontend->data_values = $values;
+        } else if ($frontend->data_keys == 'faq.content') {
+            $values = json_decode($val);
+            $values->sub_heading = 'Frequently asked questions about our Pay-Per-View advertising platform, campaigns, and payouts.';
             $frontend->data_values = $values;
         } else {
             $frontend->data_values = json_decode($val);
@@ -281,4 +299,37 @@ foreach ($withdrawMethods as $wm) {
     $wmRecord->save();
 }
 echo "Withdrawal methods updated.\n";
+
+// 8. Update FAQ Elements
+$faqs = Frontend::where('data_keys', 'faq.element')->orderBy('id', 'asc')->get();
+$faqsData = [
+    [
+        'question' => 'Where can I find PPV ads?',
+        'answer' => '<p>You can view PPV ads directly in your dashboard area by clicking on the \'PPV & Digital Marketing\' section. New opportunities are loaded daily for our users to view and earn.</p>'
+    ],
+    [
+        'question' => 'How to make a withdrawal?',
+        'answer' => '<p>Go to the \'Withdrawal\' section in your account dashboard, select your preferred withdrawal method (Bank Transfer, PayPal, Skrill, or USDT), enter the amount you wish to withdraw, and submit your request. Withdrawal requests are usually processed within 24 hours.</p>'
+    ],
+    [
+        'question' => 'What skills do I need?',
+        'answer' => '<p>No special technical skills are required! Our platform is designed for everyone. As long as you have a computer or smartphone with an internet connection, you can start viewing ads and earning rewards immediately.</p>'
+    ],
+    [
+        'question' => 'Why have I not received my withdrawal?',
+        'answer' => '<p>Most withdrawals are processed within 24 hours. If yours is taking longer, please ensure that you have provided the correct account details for your chosen withdrawal method, or contact our 24/7 support team at info@ppvbucks.com for assistance.</p>'
+    ]
+];
+
+foreach ($faqs as $index => $faq) {
+    if (isset($faq->data_values) && isset($faqsData[$index])) {
+        $values = $faq->data_values;
+        $values->question = $faqsData[$index]['question'];
+        $values->answer = $faqsData[$index]['answer'];
+        $faq->data_values = $values;
+        $faq->save();
+    }
+}
+echo "FAQ elements updated.\n";
+
 echo "Database update completed successfully!\n";
