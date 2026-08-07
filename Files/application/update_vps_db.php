@@ -216,16 +216,17 @@ echo "Subscription plans updated.\n";
 
 // 7. Create Withdrawal Methods - manually to bypass mass assignment
 function getOrCreateForm($label) {
+    $key = titleToKey($label);
     $form = Form::where('act', 'withdraw_method')
-                ->where('form_data', 'like', '%' . $label . '%')
+                ->where('form_data', 'like', '%' . $key . '%')
                 ->first();
     if (!$form) {
         $form = new Form();
         $form->act = 'withdraw_method';
         $form->form_data = [
-            'account_details' => [
-                'name' => 'Account Details',
-                'label' => $label,
+            $key => [
+                'name' => $label,
+                'label' => $key,
                 'is_required' => 'required',
                 'extensions' => '',
                 'options' => [],
@@ -336,16 +337,38 @@ foreach ($faqs as $index => $faq) {
 }
 echo "FAQ elements updated.\n";
 
-// 9. Fix double-encoded forms
+// 9. Fix double-encoded forms AND convert labels to keys with underscores to fix validation issues
 $forms = Form::all();
 foreach ($forms as $f) {
     $data = $f->form_data;
     if (is_string($data)) {
         $decoded = json_decode($data, true);
         if (json_last_error() === JSON_ERROR_NONE) {
-            $f->form_data = $decoded;
+            $data = $decoded;
+        } else {
+            continue;
+        }
+    }
+    
+    if (is_array($data) || is_object($data)) {
+        $new_form_data = [];
+        $changed = false;
+        foreach ((array)$data as $k => $field) {
+            $field = (array)$field;
+            if (isset($field['label']) && (str_contains($field['label'], ' ') || $field['label'] !== titleToKey($field['label']))) {
+                $new_key = titleToKey($field['label']);
+                $field['name'] = $field['label'];
+                $field['label'] = $new_key;
+                $new_form_data[$new_key] = $field;
+                $changed = true;
+            } else {
+                $new_form_data[$k] = $field;
+            }
+        }
+        if ($changed) {
+            $f->form_data = $new_form_data;
             $f->save();
-            echo "Fixed double-encoded Form ID: " . $f->id . "\n";
+            echo "Fixed and formatted form_data for Form ID: " . $f->id . "\n";
         }
     }
 }
