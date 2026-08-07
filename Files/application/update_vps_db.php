@@ -336,4 +336,18 @@ foreach ($faqs as $index => $faq) {
 }
 echo "FAQ elements updated.\n";
 
+// 9. Fix double-encoded forms
+$forms = Form::all();
+foreach ($forms as $f) {
+    $data = $f->form_data;
+    if (is_string($data)) {
+        $decoded = json_decode($data, true);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $f->form_data = $decoded;
+            $f->save();
+            echo "Fixed double-encoded Form ID: " . $f->id . "\n";
+        }
+    }
+}
+
 echo "Database update completed successfully!\n";
