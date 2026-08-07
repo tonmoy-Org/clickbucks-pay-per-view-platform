@@ -26,11 +26,6 @@ $pages = App\Models\Page::where('tempname',$activeTemplate)->get();
                         {{__(@$contact->data_values->short_details) }}
                         @endif
                     </p>
-                    <ul class="social-list mt-3">
-                        @foreach($socialIcons as $item)
-                        <li class="social-list__item"><a href="{{$item->data_values->url}}" class="social-list__link">@php echo $item->data_values->social_icon; @endphp</a> </li>
-                        @endforeach
-                    </ul>
                     <div class="mt-3">
                         <a href="{{url('/contact')}}" class="btn btn--base btn--sm">@lang('Contact Now')</a>
                     </div>
