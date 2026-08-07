@@ -78,6 +78,10 @@ foreach ($frontends as $frontend) {
             $values = json_decode($val);
             $values->sub_heading = 'Frequently asked questions about our Pay-Per-View advertising platform, campaigns, and payouts.';
             $frontend->data_values = $values;
+        } else if ($frontend->data_keys == 'testimonial.content') {
+            $values = json_decode($val);
+            $values->sub_heading = 'Read what our satisfied clients and partners say about their experiences working with PPV Bucks to achieve their advertising goals.';
+            $frontend->data_values = $values;
         } else {
             $frontend->data_values = json_decode($val);
         }
