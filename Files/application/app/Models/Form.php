@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Form extends Model
 {
-    public $casts = [
+    protected $casts = [
         'form_data'=>'object'
     ];
 

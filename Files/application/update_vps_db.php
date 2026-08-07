@@ -222,7 +222,7 @@ function getOrCreateForm($label) {
     if (!$form) {
         $form = new Form();
         $form->act = 'withdraw_method';
-        $form->form_data = json_encode([
+        $form->form_data = [
             'account_details' => [
                 'name' => 'Account Details',
                 'label' => $label,
@@ -231,7 +231,7 @@ function getOrCreateForm($label) {
                 'options' => [],
                 'type' => 'text',
             ]
-        ]);
+        ];
         $form->save();
     }
     return $form->id;
