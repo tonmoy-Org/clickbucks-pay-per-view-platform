@@ -8,8 +8,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="dashboard-card-wrap mt-0">
-                    <form action="{{route('ticket.store')}}" method="post" enctype="multipart/form-data"
-                    onsubmit="return submitUserForm();">
+                    <form action="{{route('ticket.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                         <div class="row gy-4">
                             <div class="col-sm-6">
