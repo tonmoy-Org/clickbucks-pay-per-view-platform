@@ -28,7 +28,7 @@ $abouts = getContent('about.element', false,4);
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="{{url('/about')}}" class="btn btn--base">@lang('Know More') <i class="las la-arrow-alt-circle-right"></i></a>
+                    <a href="{{route('user.register')}}" class="btn btn--base">@lang("Let's Start Earning") <i class="las la-arrow-alt-circle-right"></i></a>
                 </div>
             </div>
         </div>
