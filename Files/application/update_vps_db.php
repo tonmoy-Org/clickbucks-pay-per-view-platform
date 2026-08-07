@@ -46,6 +46,20 @@ foreach ($frontends as $frontend) {
             $values->heading = 'Start Earning From The Comfort Of Home!';
             $values->description = 'PPV Bucks is a leading digital marketing agency specializing in driving online traffic and maximizing conversions for businesses. With a focus on ROI-driven strategies';
             $frontend->data_values = $values;
+        } else if ($frontend->data_keys == 'banner.content') {
+            $values = json_decode($val);
+            $values->top_heading = 'PPV Bucks Platform';
+            $values->heading = 'Best PPV Bucks Platform In The World';
+            $values->highlighted_heading_text = 'PPV Bucks';
+            $values->sub_heading = 'Unlock limitless earning potential with PPV Bucks! Join today for reliable payouts, a seamless user experience, and a plethora of opportunities awaiting you. Start maximizing your earnings now!';
+            $frontend->data_values = $values;
+        } else if ($frontend->data_keys == 'banner_two.content') {
+            $values = json_decode($val);
+            $values->top_heading = 'PPV Bucks Platform';
+            $values->heading = 'Best PPV Bucks Platform in The World';
+            $values->highlighted_heading_text = 'PPV Bucks';
+            $values->sub_heading = 'Unlock limitless earning potential with PPV Bucks! Join today for reliable payouts, a seamless user experience, and a plethora of opportunities awaiting you. Start maximizing your earnings now!';
+            $frontend->data_values = $values;
         } else {
             $frontend->data_values = json_decode($val);
         }
