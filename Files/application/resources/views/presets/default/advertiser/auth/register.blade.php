@@ -14,7 +14,7 @@
                         <a href="{{route('home')}}"><img src="{{ getImage(getFilePath('logoIcon') . '/logo.png', '?' . time()) }}" alt="{{ config('app.name') }}"></a>
                     </div>
                     <div class="convert d-flex justify-content-xl-center justify-content-center">
-                        <a href="{{route('user.register')}}" class="{{ Route::is('user.register') ? 'active' : '' }}">@lang('PPV User')</a>
+                        <a href="{{route('user.register')}}" class="{{ Route::is('user.register') ? 'active' : '' }}">@lang('Affiliate')</a>
                         <a href="{{route('advertiser.register')}}" class="{{ Route::is('advertiser.register') ? 'active' : '' }}">@lang('Advertiser')</a>
                     </div>
                     <div>
