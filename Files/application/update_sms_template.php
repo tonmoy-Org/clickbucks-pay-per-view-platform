@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 // Update global SMS template
 DB::table('general_settings')->update([
-    'sms_body' => "Hi @{{username}} ({{fullname}}),\n\n{{message}}"
+    'sms_body' => "Hi @{{username}} ,\n{{message}}"
 ]);
 
-// Update SVER_CODE to remove duplicate greeting
+// Update SVER_CODE
 DB::table('notification_templates')->where('act', 'SVER_CODE')->update([
-    'sms_body' => "PPVBucks Verification\n\nYour code is {{code}}. Enter it to verify your phone. Do not share it."
+    'sms_body' => "PPVBucks Verification\nYour code is {{code}}. Do not share it."
 ]);
 
 echo "Done PPVBucks\n";
