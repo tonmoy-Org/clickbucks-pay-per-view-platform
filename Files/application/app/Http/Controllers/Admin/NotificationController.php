@@ -155,7 +155,7 @@ class NotificationController extends Controller
 
     public function smsSettingUpdate(Request $request){
         $request->validate([
-            'sms_method' => 'required|in:clickatell,infobip,messageBird,nexmo,smsBroadcast,twilio,textMagic,custom',
+            'sms_method' => 'required|in:clickatell,infobip,messageBird,nexmo,smsBroadcast,twilio,textMagic,custom,revesms',
             'clickatell_api_key' => 'required_if:sms_method,clickatell',
             'message_bird_api_key' => 'required_if:sms_method,messageBird',
             'nexmo_api_key' => 'required_if:sms_method,nexmo',
@@ -171,6 +171,9 @@ class NotificationController extends Controller
             'from' => 'required_if:sms_method,twilio',
             'custom_api_method' => 'required_if:sms_method,custom|in:get,post',
             'custom_api_url' => 'required_if:sms_method,custom',
+            'revesms_api_key' => 'required_if:sms_method,revesms',
+            'revesms_secret_key' => 'required_if:sms_method,revesms',
+            'revesms_caller_id' => 'required_if:sms_method,revesms',
         ]);
 
         $data = [
@@ -213,6 +216,11 @@ class NotificationController extends Controller
                     'name'=>$request->custom_body_name ?? [],
                     'value'=>$request->custom_body_value ?? [],
                 ],
+            ],
+            'revesms'=>[
+                'api_key'=>$request->revesms_api_key,
+                'secret_key'=>$request->revesms_secret_key,
+                'caller_id'=>$request->revesms_caller_id,
             ],
         ];
         $general = GeneralSetting::first();

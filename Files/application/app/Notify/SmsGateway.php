@@ -97,9 +97,9 @@ class SmsGateway{
 	}
 	public static function revesms($to,$fromName,$message,$credentials){
 		$url = 'http://smpp.revesms.com:7788/send';
-		$apiKey = $credentials->revesms->api_key ?? "4c708aef3fc4a9f4";
-		$secretKey = $credentials->revesms->secret_key ?? "e2022fd7";
-        $callerId = $credentials->revesms->caller_id ?? "callerID";
+		$apiKey    = $credentials->revesms->api_key;
+		$secretKey = $credentials->revesms->secret_key;
+        $callerId = $credentials->revesms->caller_id;
 
 		$payload = [
 			"apikey" => $apiKey,

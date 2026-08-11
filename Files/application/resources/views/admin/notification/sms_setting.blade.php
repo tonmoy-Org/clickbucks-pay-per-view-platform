@@ -15,6 +15,8 @@
                                 @endif>@lang('Twilio')</option>
                             <option value="custom" @if(@$general->sms_config->name == 'custom') selected
                                 @endif>@lang('Custom API')</option>
+                            <option value="revesms" @if(@$general->sms_config->name == 'revesms') selected
+                                @endif>@lang('Revesms')</option>
                         </select>
                     </div>
                     <div class="row mt-4 d-none configForm" id="clickatell">
@@ -27,6 +29,35 @@
                                 <input type="text" class="form-control" placeholder="@lang('API Key')"
                                     name="clickatell_api_key"
                                     value="{{ @$general->sms_config->clickatell->api_key }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 d-none configForm" id="revesms">
+                        <div class="col-md-12">
+                            <h6 class="mb-2">@lang('Revesms Configuration')</h6>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="fw-bold">@lang('API Key') </label>
+                                <input type="text" class="form-control" placeholder="@lang('API Key')"
+                                    name="revesms_api_key"
+                                    value="{{ @$general->sms_config->revesms->api_key }}" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="fw-bold">@lang('Secret Key') </label>
+                                <input type="text" class="form-control" placeholder="@lang('Secret Key')"
+                                    name="revesms_secret_key"
+                                    value="{{ @$general->sms_config->revesms->secret_key }}" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="fw-bold">@lang('Caller ID') </label>
+                                <input type="text" class="form-control" placeholder="@lang('Caller ID')"
+                                    name="revesms_caller_id"
+                                    value="{{ @$general->sms_config->revesms->caller_id }}" />
                             </div>
                         </div>
                     </div>

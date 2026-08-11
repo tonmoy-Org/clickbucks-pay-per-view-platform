@@ -39,7 +39,7 @@ class Sms extends NotifyProcess{
 		$message = $this->getMessage();
 		if ($this->setting->sn && $message) {
 			try {
-				$gateway = 'revesms'; // Hardcoded to use Revesms API
+				$gateway = $this->setting->sms_config->name;
                 if($this->mobile){
                     $sendSms = SmsGateway::$gateway($this->mobile,$this->setting->sms_from,strip_tags($message),$this->setting->sms_config);
                     $this->createLog('sms');
