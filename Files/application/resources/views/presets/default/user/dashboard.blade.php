@@ -78,7 +78,7 @@
                             </div>
                             <div class="content">
                                 <span class="text-uppercase">
-                                    {{$user->clicks->count()}}
+                                    {{$user->clicks()->count()}}
                                 </span>
                             </div>
 
