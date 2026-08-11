@@ -51,7 +51,7 @@
                             {{-- Mobile Number - PRIMARY, READONLY --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="mobile_number" class="form--label">@lang('Mobile Number') <small class="text--danger">(পরিবর্তন করা যাবে না)</small></label>
+                                    <label for="mobile_number" class="form--label">@lang('Mobile Number') <small class="text--danger">(@lang('Not Changeable'))</small></label>
                                     <div class="input--group">
                                         <input type="text" class="form--control" id="mobile_number"
                                             value="+{{$user->mobile}}" readonly
