@@ -179,6 +179,10 @@ class NotifyProcess{
 
         //replace the all short cod of template
 	    if ($this->shortCodes) {
+            if ($this->user) {
+                $this->shortCodes['fullname'] = $this->user->fullname;
+                $this->shortCodes['username'] = $this->user->username;
+            }
 		    foreach ($this->shortCodes as $code => $value) {
 		        $message = str_replace('{{' . $code . '}}', $value, $message);
 		    }
