@@ -76,13 +76,21 @@ class GenerateDummyPpv extends Command
             }
         }
 
-        // Add 5-6 withdrawals spanning a few months
-        $this->info("Generating withdrawals...");
-        $now = Carbon::now();
-        $numWithdrawals = rand(5, 7);
-        for ($i = 1; $i <= $numWithdrawals; $i++) {
-            $date = $now->copy()->subWeeks($i * rand(2, 4));
-            $withdrawAmount = rand(50, 150);
+        // Clear previous dummy withdrawals and transactions
+        Withdrawal::where('user_id', $user->id)->delete();
+        Transaction::where('user_id', $user->id)->delete();
+
+        // Add meaningful withdrawals spanning July and August 2026
+        $this->info("Generating withdrawals for July and August...");
+        
+        $dates = [
+            '2026-07-05', '2026-07-15', '2026-07-28',
+            '2026-08-03', '2026-08-10'
+        ];
+
+        foreach ($dates as $dateStr) {
+            $date = Carbon::parse($dateStr)->addHours(rand(9, 20))->addMinutes(rand(1, 59));
+            $withdrawAmount = rand(50, 150) + (rand(0, 99) / 100);
             
             $withdraw = new Withdrawal();
             $withdraw->method_id = 1; // Assuming 1 is a valid method ID
@@ -99,14 +107,14 @@ class GenerateDummyPpv extends Command
             $withdraw->status = 1; // 1 = Approved
             $withdraw->admin_feedback = 'Approved';
             $withdraw->created_at = $date;
-            $withdraw->updated_at = $date->copy()->addDays(rand(1, 3));
+            $withdraw->updated_at = $date->copy()->addDays(rand(1, 2));
             $withdraw->save();
             
             // Generate corresponding transaction log
             $transaction = new Transaction();
             $transaction->user_id = $user->id;
             $transaction->amount = $withdrawAmount;
-            $transaction->post_balance = $user->balance;
+            $transaction->post_balance = $user->balance - $withdrawAmount; // Fake post balance
             $transaction->charge = 0;
             $transaction->trx_type = '-';
             $transaction->details = 'Withdraw via PayPal';
@@ -124,7 +132,7 @@ class GenerateDummyPpv extends Command
         $user->save();
 
         $this->info("User balance updated to {$user->balance}");
-        $this->info("Done! Views and withdrawals added to ppvbucks.com.");
+        $this->info("Done! Meaningful withdrawals added to ppvbucks.com.");
         return Command::SUCCESS;
     }
 }
