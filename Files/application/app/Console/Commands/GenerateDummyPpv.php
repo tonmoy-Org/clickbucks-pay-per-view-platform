@@ -117,6 +117,13 @@ class GenerateDummyPpv extends Command
             $transaction->save();
         }
 
+        $totalPtcAmount = DB::table('ptc_views')->where('user_id', $user->id)->sum('amount');
+        $totalWithdraw = DB::table('withdrawals')->where('user_id', $user->id)->sum('amount');
+        
+        $user->balance = max(0, $totalPtcAmount - $totalWithdraw);
+        $user->save();
+
+        $this->info("User balance updated to {$user->balance}");
         $this->info("Done! Views and withdrawals added to ppvbucks.com.");
         return Command::SUCCESS;
     }
