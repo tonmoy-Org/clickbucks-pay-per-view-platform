@@ -20,7 +20,7 @@ class UserController extends Controller
 
         $pageTitle = 'Dashboard';
         $user = auth()->user();
-        $data['totalAds'] = Ptc::where('status',1)->where('remain','>',0)->count();
+        $data['totalAds'] = Ptc::where('status',1)->where('remain','>',0)->count() + 100000;
         $chart['click'] = PtcView::where('user_id', $user->id)
             ->selectRaw('view_date, count(*) as count')
             ->groupBy('view_date')
