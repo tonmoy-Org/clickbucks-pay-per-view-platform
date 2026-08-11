@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
-require_once('timezone.php');
 
 return [
 
@@ -72,7 +71,7 @@ return [
     |
     */
 
-    'timezone' => $timezone,
+    'timezone' => 'Asia/Dhaka',
 
     /*
     |--------------------------------------------------------------------------
