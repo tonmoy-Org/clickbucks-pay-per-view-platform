@@ -32,10 +32,10 @@
                             </div>
                             <div class="content">
                                 <span class="text-uppercase">
-                                @if(($data['totalAds'] - $user->clicks->where('view_date', Date('Y-m-d'))->count()) <= 0)
+                                @if(($data['totalAds'] - $user->clicks()->where('view_date', Date('Y-m-d'))->count()) <= 0)
                                     0
                                 @else
-                                    {{ $data['totalAds'] - $user->clicks->where('view_date', Date('Y-m-d'))->count() }}
+                                    {{ $data['totalAds'] - $user->clicks()->where('view_date', Date('Y-m-d'))->count() }}
                                 @endif
                                 </span>
                             </div>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="content">
                                 <span class="text-uppercase">
-                                    {{$user->clicks->where('view_date',Date('Y-m-d'))->count()}}
+                                    {{$user->clicks()->where('view_date',Date('Y-m-d'))->count()}}
                                 </span>
                             </div>
 

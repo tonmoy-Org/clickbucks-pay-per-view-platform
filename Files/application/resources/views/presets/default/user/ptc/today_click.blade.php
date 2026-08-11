@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <p class="text-end">@lang('Today Clicks'):  <strong>{{auth()->user()->clicks->where('view_date',Date('Y-m-d'))->count()}}</strong></p>
+                    <p class="text-end">@lang('Today Clicks'):  <strong>{{auth()->user()->clicks()->where('view_date',Date('Y-m-d'))->count()}}</strong></p>
                     <div class="col-xl-12">
                         <table class="custom-table">
                             <thead>
