@@ -20,16 +20,19 @@ class UserController extends Controller
 
         $pageTitle = 'Dashboard';
         $user = auth()->user();
-        $ptc = PtcView::where('user_id',auth()->user()->id)->get(['view_date','amount']);
         $data['totalAds'] = Ptc::where('status',1)->where('remain','>',0)->count();
+        $chart['click'] = PtcView::where('user_id', $user->id)
+            ->selectRaw('view_date, count(*) as count')
+            ->groupBy('view_date')
+            ->pluck('count', 'view_date');
 
-        $chart['click'] = $ptc->groupBy('view_date')->map(function ($item,$key) {
-            return collect($item)->count();
-        });
-
-        $chart['amount'] = $ptc->groupBy('view_date')->map(function ($item,$key) {
-            return collect($item)->sum('amount');
-        })->sort()->reverse()->take(7)->toArray();
+        $chart['amount'] = PtcView::where('user_id', $user->id)
+            ->selectRaw('view_date, sum(amount) as total')
+            ->groupBy('view_date')
+            ->orderBy('total', 'desc')
+            ->limit(7)
+            ->pluck('total', 'view_date')
+            ->toArray();
 
         $withdrawalsReport = Withdrawal::selectRaw("SUM(amount) as amount, MONTHNAME(created_at) as month_name, MONTH(created_at) as month_num")
         ->whereYear('created_at', date('Y'))
