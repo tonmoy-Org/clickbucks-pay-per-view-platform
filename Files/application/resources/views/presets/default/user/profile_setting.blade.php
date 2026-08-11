@@ -48,24 +48,25 @@
                                 </div>
                             </div>
 
-                            {{-- Mobile Number - PRIMARY, CHANGEABLE --}}
+                            {{-- Mobile Number - PRIMARY, READONLY --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="mobile_number" class="form--label">@lang('Mobile Number')</label>
+                                    <label for="mobile_number" class="form--label">@lang('Mobile Number') <small class="text--danger">(পরিবর্তন করা যাবে না)</small></label>
                                     <div class="input--group">
-                                        <input type="text" class="form--control" id="mobile_number" name="mobile"
-                                            value="{{$user->mobile}}" placeholder="e.g. 8801XXXXXXXXX">
+                                        <input type="text" class="form--control" id="mobile_number"
+                                            value="+{{$user->mobile}}" readonly
+                                            style="background-color: #f5f5f5; cursor: not-allowed;">
                                     </div>
                                 </div>
                             </div>
 
-                            {{-- Email - READONLY --}}
+                            {{-- Email - EDITABLE --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="email_adress" class="form--label">@lang('E-mail Address')</label>
                                     <div class="input--group">
-                                        <input type="text" class="form--control" id="email_adress" value="{{$user->email}}"
-                                            readonly style="background-color: #f5f5f5; cursor: not-allowed;">
+                                        <input type="email" class="form--control" id="email_adress" name="email"
+                                            value="{{$user->email}}">
                                     </div>
                                 </div>
                             </div>
