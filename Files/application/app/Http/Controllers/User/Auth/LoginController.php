@@ -89,7 +89,13 @@ class LoginController extends Controller
     {
         $login = request()->input('username');
 
-        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if (is_numeric($login)) {
+            $fieldType = 'mobile';
+            $login = '880' . ltrim($login, '0');
+        } else {
+            $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        }
+        
         request()->merge([$fieldType => $login]);
         return $fieldType;
     }

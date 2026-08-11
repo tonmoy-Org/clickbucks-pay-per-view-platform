@@ -44,7 +44,7 @@ class RegisterController extends Controller
     {
         $pageTitle = "Register";
         $info = json_decode(json_encode(getIpInfo()), true);
-        $mobileCode = @implode(',', $info['code']);
+        $mobileCode = 'BD'; // Hardcoded default country
         $countries = json_decode(file_get_contents(resource_path('views/includes/country.json')));
         return view($this->activeTemplate . 'user.auth.register', compact('pageTitle','mobileCode','countries'));
     }
@@ -104,6 +104,8 @@ class RegisterController extends Controller
         }
 
 
+        $request->merge(['mobile' => ltrim($request->mobile, '0')]);
+        
         $exist = User::where('mobile',$request->mobile_code.$request->mobile)->first();
         if ($exist) {
             $notify[] = ['error', 'The mobile number already exists'];
@@ -137,7 +139,7 @@ class RegisterController extends Controller
         $user->username = trim($data['username']);
         $user->ref_by = $referUser ? $referUser->id : 0;
         $user->country_code = $data['country_code'];
-        $user->mobile = $data['mobile_code'].$data['mobile'];
+        $user->mobile = $data['mobile_code'].ltrim($data['mobile'], '0');
         $user->address = [
             'address' => '',
             'state' => '',
@@ -147,8 +149,8 @@ class RegisterController extends Controller
         ];
         $user->status = 1;
         $user->kv = $general->kv ? 0 : 1;
-        $user->ev = $general->ev ? 0 : 1;
-        $user->sv = $general->sv ? 0 : 1;
+        $user->ev = 1;
+        $user->sv = 0;
         $user->ts = 0;
         $user->tv = 1;
         $user->save();

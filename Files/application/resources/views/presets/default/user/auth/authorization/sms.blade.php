@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <p>
                             @lang('If you don\'t get any code'), <a href="{{route('user.send.verify.code', 'phone')}}"
-                                class="forget-pass text--base"> @lang('Try again')</a>
+                                class="forget-pass text--base"> @lang('Resend Code')</a>
                         </p>
                         @if($errors->has('resend'))
                         <br />

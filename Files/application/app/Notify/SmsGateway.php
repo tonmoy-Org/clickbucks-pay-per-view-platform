@@ -95,4 +95,38 @@ class SmsGateway{
 			CurlRequest::curlPostContent($credential->url,$body,$header);
 		}
 	}
+	public static function revesms($to,$fromName,$message,$credentials){
+		$url = 'http://smpp.revesms.com:7788/send';
+		$apiKey = $credentials->revesms->api_key ?? "4c708aef3fc4a9f4";
+		$secretKey = $credentials->revesms->secret_key ?? "e2022fd7";
+        $callerId = $credentials->revesms->caller_id ?? "callerID";
+
+		$payload = [
+			"apikey" => $apiKey,
+			"secretkey" => $secretKey,
+			"content" => [
+				[
+					"callerID" => $callerId,
+					"toUser" => $to,
+					"messageContent" => strip_tags($message)
+				]
+			]
+		];
+
+        $headers = [
+            'Content-Type: application/json'
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+        
+        \Illuminate\Support\Facades\Log::info('Revesms Request', ['payload' => $payload, 'result' => $result, 'error' => $error]);
+	}
 }

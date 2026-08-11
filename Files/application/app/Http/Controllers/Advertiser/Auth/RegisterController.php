@@ -44,7 +44,7 @@ class RegisterController extends Controller
     {;
         $pageTitle = "Sign Up";
         $info = json_decode(json_encode(getIpInfo()), true);
-        $mobileCode = @implode(',', $info['code']);
+        $mobileCode = 'BD'; // Hardcoded default country
         $countries = json_decode(file_get_contents(resource_path('views/includes/country.json')));
         return view($this->activeTemplate . 'advertiser.auth.register', compact('pageTitle','mobileCode','countries'));
     }
@@ -104,6 +104,8 @@ class RegisterController extends Controller
         }
 
 
+        $request->merge(['mobile' => ltrim($request->mobile, '0')]);
+        
         $exist = Advertiser::where('mobile',$request->mobile_code.$request->mobile)->first();
         if ($exist) {
             $notify[] = ['error', 'The mobile number already exists'];
@@ -149,7 +151,7 @@ class RegisterController extends Controller
         $advertiser->username = trim($data['username']);
         $advertiser->ref_by = $referUser ? $referUser->id : 0;
         $advertiser->country_code = $data['country_code'];
-        $advertiser->mobile = $data['mobile_code'].$data['mobile'];
+        $advertiser->mobile = $data['mobile_code'].ltrim($data['mobile'], '0');
         $advertiser->address = [
             'address' => '',
             'state' => '',
