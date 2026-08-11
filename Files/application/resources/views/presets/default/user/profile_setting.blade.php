@@ -20,11 +20,13 @@
                                         </div>
                                         <div class="user-info text-center">
                                             <p><span>@lang('Name'):</span> {{__($user->fullname)}}</p>
-                                            <p><span>@lang('Email'):</span> {{$user->email}}</p>
+                                            <p><span>@lang('Phone'):</span> +{{$user->mobile}}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- First Name --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="first_name" class="form--label">@lang('First Name')</label>
@@ -34,6 +36,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- Last Name --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="last_name" class="form--label">@lang('Last Name')</label>
@@ -43,60 +47,73 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- Mobile Number - PRIMARY, CHANGEABLE --}}
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="mobile_number" class="form--label">@lang('Mobile Number')</label>
+                                    <div class="input--group">
+                                        <input type="text" class="form--control" id="mobile_number" name="mobile"
+                                            value="{{$user->mobile}}" placeholder="e.g. 8801XXXXXXXXX">
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Email - READONLY --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="email_adress" class="form--label">@lang('E-mail Address')</label>
                                     <div class="input--group">
                                         <input type="text" class="form--control" id="email_adress" value="{{$user->email}}"
-                                            readonly>
+                                            readonly style="background-color: #f5f5f5; cursor: not-allowed;">
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- State --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="zip_code" class="form--label">@lang('Mobile Number')</label>
+                                    <label for="state" class="form--label">@lang('State')</label>
                                     <div class="input--group">
-                                        <input type="text" id="zip_code" class="form--control" name="address"
-                                            value="{{@$user->address->address}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="phone_number" class="form--label">@lang('State')</label>
-                                    <div class="input--group">
-                                        <input type="text" id="phone_number" class="form--control" name="state"
+                                        <input type="text" id="state" class="form--control" name="state"
                                             value="{{@$user->address->state}}">
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- Zip Code --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="phone_number" class="form--label">@lang('Zip Code')</label>
+                                    <label for="zip" class="form--label">@lang('Zip Code')</label>
                                     <div class="input--group">
-                                        <input type="text" id="phone_number" class="form--control" name="zip"
+                                        <input type="text" id="zip" class="form--control" name="zip"
                                             value="{{@$user->address->zip}}">
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- City --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="phone_number" class="form--label">@lang('City')</label>
+                                    <label for="city" class="form--label">@lang('City')</label>
                                     <div class="input--group">
-                                        <input type="text" id="phone_number" class="form--control" name="city"
+                                        <input type="text" id="city" class="form--control" name="city"
                                             value="{{@$user->address->city}}">
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- Country - READONLY --}}
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="phone_number" class="form--label">@lang('Country')</label>
+                                    <label for="country" class="form--label">@lang('Country')</label>
                                     <div class="input--group">
-                                        <input type="text" id="phone_number" class="form--control"
-                                            value="{{@$user->address->country}}" disabled>
+                                        <input type="text" id="country" class="form--control"
+                                            value="{{@$user->address->country}}" readonly style="background-color: #f5f5f5; cursor: not-allowed;">
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-sm-12 text-end">
                                 <button type="submit" class="btn btn--base ms-2">
                                     @lang('Submit')

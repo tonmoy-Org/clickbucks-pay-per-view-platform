@@ -20,17 +20,22 @@ class ProfileController extends Controller
     {
         $request->validate([
             'firstname' => 'required|string',
-            'lastname' => 'required|string',
-            'image' => ['image',new FileTypeValidate(['jpg','jpeg','png'])]
+            'lastname'  => 'required|string',
+            'mobile'    => 'nullable|string|unique:users,mobile,'.auth()->id(),
+            'image'     => ['image', new FileTypeValidate(['jpg','jpeg','png'])]
         ],[
-            'firstname.required'=>'First name field is required',
-            'lastname.required'=>'Last name field is required'
+            'firstname.required' => 'First name field is required',
+            'lastname.required'  => 'Last name field is required',
+            'mobile.unique'      => 'This mobile number is already used by another account.',
         ]);
 
         $user = auth()->user();
 
         $user->firstname = $request->firstname;
-        $user->lastname = $request->lastname;
+        $user->lastname  = $request->lastname;
+        if ($request->filled('mobile')) {
+            $user->mobile = ltrim($request->mobile, '0+');
+        }
 
         $user->address = [
             'address' => $request->address,
